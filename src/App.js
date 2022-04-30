@@ -8,6 +8,7 @@ import Register from "./component/page/Account/Register/Register";
 import AddItem from "./component/page/AddItem/AddItem";
 import Blogs from "./component/page/Blogs/Blogs";
 import Home from "./component/page/Home/Home";
+import Inventory from "./component/page/Home/Inventory/Inventory";
 import ManageItem from "./component/page/MnageItem/ManageItem";
 import MyItems from "./component/page/MyItems/MyItems";
 import RequireAuth from "./component/RequireAuth/RequireAuth";
@@ -21,7 +22,14 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/manageItem" element={<ManageItem></ManageItem>}></Route>
+        <Route
+          path="/manageItem"
+          element={
+            <RequireAuth>
+              <ManageItem></ManageItem>
+            </RequireAuth>
+          }
+        ></Route>
         <Route
           path="/addItem"
           element={
@@ -30,7 +38,22 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/myItem" element={<MyItems></MyItems>}></Route>
+        <Route
+          path="/myItem"
+          element={
+            <RequireAuth>
+              <MyItems></MyItems>
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="inventory/:id"
+          element={
+            <RequireAuth>
+              <Inventory></Inventory>
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/blog" element={<Blogs></Blogs>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>

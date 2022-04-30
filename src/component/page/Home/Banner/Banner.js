@@ -3,7 +3,7 @@ import "./Banner.css";
 const Banner = () => {
   return (
     <div style={{ backgroundColor: "#e6e6e6" }}>
-      <div className="flex flex-col md:flex-row md:justify-between max-w-7xl mx-auto items-center">
+      <div className="flex flex-col-reverse md:flex-row md:justify-between max-w-7xl mx-auto items-center">
         <div>
           <img
             className="w-full"

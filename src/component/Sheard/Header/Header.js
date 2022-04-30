@@ -33,15 +33,19 @@ const Header = () => {
                 Home{" "}
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/manageItem">
-                Manage Item
-              </Nav.Link>
-              <Nav.Link as={Link} to="/addItem">
-                Add Item
-              </Nav.Link>
-              <Nav.Link as={Link} to="/myItem">
-                My Item
-              </Nav.Link>
+              {user && (
+                <>
+                  <Nav.Link as={Link} to="/manageItem">
+                    Manage Item
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/addItem">
+                    Add Item
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/myItem">
+                    My Item
+                  </Nav.Link>
+                </>
+              )}
 
               <Nav.Link as={Link} to="/blog">
                 Blog
