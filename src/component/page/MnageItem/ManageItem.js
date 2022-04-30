@@ -21,6 +21,10 @@ const ManageItem = () => {
     );
   }
   const handleDelete = (id) => {
+    const confirm = window.confirm("Are you sure you want to delete");
+    if (!confirm) {
+      return;
+    }
     const url = `https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`;
     fetch(url, {
       method: "DELETE",

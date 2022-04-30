@@ -1,13 +1,17 @@
 import React from "react";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 const AddItem = () => {
+  const [user] = useAuthState(auth);
   const handleAddProduct = (e) => {
     e.preventDefault();
+
     const product_name = e.target.name.value;
     const image = e.target.image.value;
     const description = e.target.description.value;
     const price = e.target.price.value;
     const quantity = e.target.quantity.value;
+    const email = e.target.email.value;
     const supplyar_name = e.target.supplier_name.value;
     const card = {
       product_name,
@@ -16,6 +20,7 @@ const AddItem = () => {
       price,
       quantity,
       supplyar_name,
+      email,
     };
     console.log(card);
     fetch("https://enigmatic-eyrie-33917.herokuapp.com/product", {
@@ -36,6 +41,13 @@ const AddItem = () => {
       <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
         <h2 className="text-4xl px-4 ">Add a new item</h2>
         <form onSubmit={handleAddProduct} className="mt-10 space-y-8">
+          <input
+            name="email"
+            className="w-full border rounded h-12 px-4 focus:outline-none"
+            value={user.email}
+            readOnly
+            type="email"
+          />
           <input
             name="name"
             className="w-full border rounded h-12 px-4 focus:outline-none"
