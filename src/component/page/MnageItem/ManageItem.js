@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import useAllProduct from "../../hooks/useAllProduct";
 import Loading from "../../Sheard/Loading/Loading";
 
 const ManageItem = () => {
-  const [products, setProducts] = useAllProduct();
-  console.log(products);
+  // const [products, setProducts] = useAllProduct();
+  const [products, setProducts] = useState([]);
+  const [isReload, setIsReload] = useState(false);
+  useEffect(() => {
+    const url = "https://enigmatic-eyrie-33917.herokuapp.com/products";
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [isReload]);
+  // console.log(products);
   if (products.length == 0) {
     return (
       <div>
@@ -13,6 +20,19 @@ const ManageItem = () => {
       </div>
     );
   }
+  const handleDelete = (id) => {
+    const url = `https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`;
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // const product = products.find((product) => product._id !== id);
+        // setProducts([...products,product]);
+        setIsReload(!isReload);
+      });
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <Table striped bordered hover>
@@ -33,7 +53,10 @@ const ManageItem = () => {
                 <td>{product.quantity}</td>
                 <td className="flex justify-between w-96:flex-col">
                   <p>{product.supplyar_name}</p>
-                  <button className="btn btn-danger">
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="btn btn-danger"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"

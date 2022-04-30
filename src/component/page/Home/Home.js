@@ -11,3 +11,4 @@ const Home = () => {
 };
 
 export default Home;
+// stackoverflow question https://stackoverflow.com/questions/72067527/uncaught-in-promise-typeerror-failed-to-execute-fetch-on-window-invalid
