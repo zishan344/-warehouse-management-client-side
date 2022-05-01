@@ -8,8 +8,13 @@ const MyItems = () => {
   const [addProduct, setAddProduct] = useState([]);
   useEffect(() => {
     const email = user.email;
-    const url = `https://enigmatic-eyrie-33917.herokuapp.com/order?email=${email}`;
-    fetch(url)
+    // const url = `http://localhost:5000/addProduct?email=${email}`;
+    const url = `https://enigmatic-eyrie-33917.herokuapp.com/addProduct?email=${email}`;
+    fetch(url, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setAddProduct(data);
