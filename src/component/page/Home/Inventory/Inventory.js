@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Loading from "../../../Sheard/Loading/Loading";
 
 const Inventory = () => {
@@ -20,11 +21,40 @@ const Inventory = () => {
       </div>
     );
   }
-  //   const delivered = () => {
-  //     const quantity = product["quantity"];
-  //     const result = console.log(quantity);
-  //     return quantity;
-  //   };
+  const delivered = (e) => {
+    const product_name = product.product_name;
+    const image = product.image;
+    const description = product.description;
+    const price = product.price;
+    const quantity = parseInt(product.quantity) - 1;
+    const email = product.email;
+    const supplyar_name = product.supplyar_name;
+    if (quantity == -1) {
+      return toast.danger("you have not enough product");
+    }
+    const card = {
+      product_name,
+      image,
+      description,
+      price,
+      quantity,
+      supplyar_name,
+      email,
+    };
+    fetch(`https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(card),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setIsReload(!isReload);
+      });
+  };
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const product_name = product.product_name;
@@ -77,7 +107,10 @@ const Inventory = () => {
       <p className="mt-1 text-lg font-medium text-gray-900">
         Supplier :{product?.supplyar_name}
       </p>
-      <button className=" my-2 cursor-pointer flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <button
+        onClick={delivered}
+        className=" my-2 cursor-pointer flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
         delivered
       </button>
       {/* update product quantity */}
