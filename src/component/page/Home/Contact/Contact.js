@@ -136,7 +136,7 @@ const Contact = () => {
                           id="about"
                           name="description"
                           rows="4"
-                          className="   mt-2 py-2 block w-full focus:outline-none sm:text-sm border border-gray-300 rounded-md"
+                          className="px-4 mt-2 py-2 block w-full focus:outline-none sm:text-sm border border-gray-300 rounded-md"
                           placeholder="what do you want say ?"
                         ></textarea>
                       </div>
