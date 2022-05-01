@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import Loading from "../../Sheard/Loading/Loading";
 import Product from "../Home/Product/Product";
 const MyItems = () => {
   const [user, loading, error] = useAuthState(auth);
   const [isReload, setIsReload] = useState(false);
   const [addProduct, setAddProduct] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const email = user.email;
     const getOrders = async () => {
@@ -32,7 +34,13 @@ const MyItems = () => {
     };
     getOrders();
   }, [user, isReload]);
-
+  if (addProduct.length === 0) {
+    return (
+      <div>
+        <Loading></Loading>
+      </div>
+    );
+  }
   const handleDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (!confirm) {

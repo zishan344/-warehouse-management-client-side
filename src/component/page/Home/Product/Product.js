@@ -32,9 +32,12 @@ const Product = ({ product, children }) => {
         ${product?.price}
       </p>
       <p className="mt-1 text-lg text-gray-600 my-2">{product?.description}</p>
-      <p className="mt-1 text-lg font-medium text-gray-900">
-        Supplier :{product?.supplyar_name}
-      </p>
+      <div className="relative">
+        <p className=" product bottom-0 text-lg font-medium text-gray-900">
+          Supplier :{product?.supplyar_name}
+        </p>
+      </div>
+
       <div className="flex flex-col md:flex-row md:items-center justify-between static md:absolute bottom-0 w-full">
         <button
           onClick={() => updateProduct(_id)}
