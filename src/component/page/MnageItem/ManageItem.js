@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Loading from "../../Sheard/Loading/Loading";
 
 const ManageItem = () => {
@@ -13,7 +15,7 @@ const ManageItem = () => {
       .then((data) => setProducts(data));
   }, [isReload]);
   // console.log(products);
-  if (products.length == 0) {
+  if (products.length === 0) {
     return (
       <div>
         <Loading></Loading>
@@ -31,8 +33,7 @@ const ManageItem = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // const product = products.find((product) => product._id !== id);
-        // setProducts([...products,product]);
+        toast.success("successfully deleted this item");
         setIsReload(!isReload);
       });
   };
@@ -81,6 +82,13 @@ const ManageItem = () => {
           })}
         </tbody>
       </Table>
+      <div className="flex flex-col md:flex-row md:items-center justify-between ">
+        <button className="cursor-pointer flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <Link className="text-white" to="/addItem">
+            add new item
+          </Link>
+        </button>
+      </div>
     </div>
   );
 };

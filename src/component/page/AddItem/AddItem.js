@@ -1,11 +1,11 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 const AddItem = () => {
   const [user] = useAuthState(auth);
   const handleAddProduct = (e) => {
     e.preventDefault();
-
     const product_name = e.target.name.value;
     const image = e.target.image.value;
     const description = e.target.description.value;
@@ -32,6 +32,7 @@ const AddItem = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast("Added product successfully");
         console.log(data);
       });
     e.target.reset();
