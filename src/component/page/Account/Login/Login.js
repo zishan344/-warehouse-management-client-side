@@ -1,12 +1,30 @@
-import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useState } from "react";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../../firebase.init";
 import Social from "../Social/Social";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, passworderror] =
+    useSendPasswordResetEmail(auth);
+  const [email, setEmail] = useState("");
+  console.log(email);
+  const emailHandle = (e) => {
+    setEmail(e.target.value);
+  };
+  const resetPassword = async () => {
+    if (!email) {
+      return toast("please enter your email address");
+    }
+    await sendPasswordResetEmail(email);
+    toast("successfully send reset email");
+  };
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -38,6 +56,7 @@ const Login = () => {
         <h2 className="text-4xl px-4 ">Log In</h2>
         <form onSubmit={handleSingnIn} className="mt-10 space-y-8">
           <input
+            onBlur={emailHandle}
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="Email adress "
             type="email"
@@ -76,13 +95,14 @@ const Login = () => {
                 type="submit"
                 value="login now"
               />
-              <p
-                className="text-gray-400 text-sm 
+              <button
+                onClick={resetPassword}
+                className="text-gray-400 cursor-pointer text-sm 
             underline self-center 
             md:self-auto mt-4 md:mt-0"
               >
                 Forgot your password?
-              </p>
+              </button>
             </div>
             <Link to="/register" className=" text-blue-600 underline">
               <p className="my-4">I have not registered</p>
