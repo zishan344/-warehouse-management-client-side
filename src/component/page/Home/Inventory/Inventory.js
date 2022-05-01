@@ -29,9 +29,14 @@ const Inventory = () => {
     const quantity = parseInt(product.quantity) - 1;
     const email = product.email;
     const supplyar_name = product.supplyar_name;
+    const confirm = window.confirm("Are you sure you want to delivered");
+    if (!confirm) {
+      return;
+    }
     if (quantity == -1) {
       return toast.danger("you have not enough product");
     }
+
     const card = {
       product_name,
       image,
@@ -51,6 +56,7 @@ const Inventory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast.success(`${1} product delivered successfully`);
         setIsReload(!isReload);
       });
   };
@@ -61,7 +67,8 @@ const Inventory = () => {
     const image = product.image;
     const description = product.description;
     const price = product.price;
-    const quantity = e.target.update.value;
+    const inputValue = e.target.update.value;
+    const quantity = parseInt(inputValue) + parseInt(product.quantity);
     const email = product.email;
     const supplyar_name = product.supplyar_name;
     const card = {
@@ -83,6 +90,7 @@ const Inventory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast.success(`${inputValue} product added successfully`);
         setIsReload(!isReload);
       });
     e.target.reset();
