@@ -12,7 +12,9 @@ import Inventory from "./component/page/Home/Inventory/Inventory";
 import ManageItem from "./component/page/MnageItem/ManageItem";
 import MyItems from "./component/page/MyItems/MyItems";
 import RequireAuth from "./component/RequireAuth/RequireAuth";
+import Footer from "./component/Sheard/Footer/Footer";
 import Header from "./component/Sheard/Header/Header";
+import Notfound from "./component/Sheard/NotFound/Notfound";
 
 function App() {
   return (
@@ -57,7 +59,9 @@ function App() {
         <Route path="/blog" element={<Blogs></Blogs>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="*" element={<Notfound />} />
       </Routes>
+      <Footer></Footer>
       <ToastContainer />
     </div>
   );

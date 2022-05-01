@@ -38,7 +38,7 @@ const AddItem = () => {
   };
   return (
     <div>
-      <div className="bg-white p-5 max-w-md mx-auto rounded shadow-sm">
+      <div className="my-4 bg-white p-5 max-w-md mx-auto rounded shadow-sm">
         <h2 className="text-4xl px-4 ">Add a new item</h2>
         <form onSubmit={handleAddProduct} className="mt-10 space-y-8">
           <input
