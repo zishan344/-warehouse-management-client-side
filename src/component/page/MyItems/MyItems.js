@@ -1,26 +1,38 @@
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import Product from "../Home/Product/Product";
 const MyItems = () => {
   const [user, loading, error] = useAuthState(auth);
   const [isReload, setIsReload] = useState(false);
   const [addProduct, setAddProduct] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const email = user.email;
-    // const url = `http://localhost:5000/addProduct?email=${email}`;
-    const url = `https://enigmatic-eyrie-33917.herokuapp.com/addProduct?email=${email}`;
-    fetch(url, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    const getOrders = async () => {
+      const email = user.email;
+      const url = `https://enigmatic-eyrie-33917.herokuapp.com/addProduct?email=${email}`;
+      try {
+        const { data } = await axios.get(url, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
         setAddProduct(data);
-        console.log(data);
-      });
+      } catch (error) {
+        console.log(error.message);
+        if (error.response.status === 401 || error.response.status === 403) {
+          signOut(auth);
+          navigate("/login");
+        }
+      }
+    };
+    getOrders();
   }, [user, isReload]);
+
   const handleDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (!confirm) {
