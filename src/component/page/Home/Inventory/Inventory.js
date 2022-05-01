@@ -6,12 +6,13 @@ import Loading from "../../../Sheard/Loading/Loading";
 const Inventory = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [isReload, setIsReload] = useState(false);
   useEffect(() => {
     const url = `https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProduct(data));
-  }, []);
+  }, [isReload]);
   if (product == {}) {
     return (
       <div>
@@ -26,17 +27,33 @@ const Inventory = () => {
   //   };
   const handleUpdate = (e) => {
     e.preventDefault();
+    const product_name = product.product_name;
+    const image = product.image;
+    const description = product.description;
+    const price = product.price;
     const quantity = e.target.update.value;
+    const email = product.email;
+    const supplyar_name = product.supplyar_name;
+    const card = {
+      product_name,
+      image,
+      description,
+      price,
+      quantity,
+      supplyar_name,
+      email,
+    };
     fetch(`https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(quantity),
+      body: JSON.stringify(card),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setIsReload(!isReload);
       });
     e.target.reset();
   };

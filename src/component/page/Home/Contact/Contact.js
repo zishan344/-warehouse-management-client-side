@@ -90,6 +90,7 @@ const Contact = () => {
                         Name
                       </label>
                       <input
+                        required
                         type="text"
                         name="name"
                         id="name"
@@ -106,6 +107,7 @@ const Contact = () => {
                         Email
                       </label>
                       <input
+                        required
                         type="text"
                         name="email"
                         id="email"
@@ -122,6 +124,7 @@ const Contact = () => {
                         Subject
                       </label>
                       <input
+                        required
                         type="text"
                         name="subject"
                         id="subject"
@@ -133,6 +136,7 @@ const Contact = () => {
                     <div className="col-start-1 col-end-7">
                       <div className="mt-4">
                         <textarea
+                          required
                           id="about"
                           name="description"
                           rows="4"

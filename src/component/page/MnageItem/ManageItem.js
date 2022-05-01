@@ -31,7 +31,6 @@ const ManageItem = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         // const product = products.find((product) => product._id !== id);
         // setProducts([...products,product]);
         setIsReload(!isReload);

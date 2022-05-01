@@ -20,6 +20,7 @@ const Register = () => {
         <h2 className="text-4xl px-4 ">Register</h2>
         <form onSubmit={handleRegister} className="mt-10 space-y-8">
           <input
+            required
             name="name"
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="Name"
@@ -27,6 +28,7 @@ const Register = () => {
           />
 
           <input
+            required
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="Email adress "
             type="email"
@@ -35,6 +37,7 @@ const Register = () => {
 
           <div className="flex items-center ">
             <input
+              required
               name="password"
               className="w-full border rounded h-12 px-4 focus:outline-none -mr-7"
               placeholder="Password"

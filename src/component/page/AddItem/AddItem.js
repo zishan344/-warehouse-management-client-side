@@ -42,6 +42,7 @@ const AddItem = () => {
         <h2 className="text-4xl px-4 ">Add a new item</h2>
         <form onSubmit={handleAddProduct} className="mt-10 space-y-8">
           <input
+            required
             name="email"
             className="w-full border rounded h-12 px-4 focus:outline-none"
             value={user.email}
@@ -49,6 +50,7 @@ const AddItem = () => {
             type="email"
           />
           <input
+            required
             name="name"
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="Product name"
@@ -56,6 +58,7 @@ const AddItem = () => {
           />
 
           <input
+            required
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="image url"
             type="text"
@@ -73,18 +76,21 @@ const AddItem = () => {
           </div>
 
           <input
+            required
             name="price"
             className="w-full border rounded h-12 px-4 focus:outline-none -mr-7"
             placeholder="Price"
             type="number"
           />
           <input
+            required
             name="quantity"
             className="w-full border rounded h-12 px-4 focus:outline-none -mr-7"
             placeholder="Quantity"
             type="number"
           />
           <input
+            required
             name="supplier_name"
             className="w-full border rounded h-12 px-4 focus:outline-none -mr-7"
             placeholder="Supplier name"

@@ -14,7 +14,6 @@ const Login = () => {
   const [sendPasswordResetEmail, sending, passworderror] =
     useSendPasswordResetEmail(auth);
   const [email, setEmail] = useState("");
-  console.log(email);
   const emailHandle = (e) => {
     setEmail(e.target.value);
   };
@@ -25,6 +24,7 @@ const Login = () => {
     await sendPasswordResetEmail(email);
     toast("successfully send reset email");
   };
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -56,6 +56,7 @@ const Login = () => {
         <h2 className="text-4xl px-4 ">Log In</h2>
         <form onSubmit={handleSingnIn} className="mt-10 space-y-8">
           <input
+            required
             onBlur={emailHandle}
             className="w-full border rounded h-12 px-4 focus:outline-none"
             placeholder="Email adress "
@@ -65,6 +66,7 @@ const Login = () => {
 
           <div className="flex items-center ">
             <input
+              required
               className="w-full border rounded h-12 px-4 focus:outline-none -mr-7"
               placeholder="Password"
               type="password"
@@ -88,6 +90,9 @@ const Login = () => {
               />
             </svg>
           </div>
+          <p className="text-danger">
+            {error?.message || passworderror?.message}
+          </p>
           <div>
             <div className="flex flex-col md:flex-row md:items-center justify-between ">
               <input
