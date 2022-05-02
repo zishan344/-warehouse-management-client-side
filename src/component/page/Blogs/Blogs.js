@@ -2,7 +2,7 @@ import React from "react";
 
 const Blogs = () => {
   return (
-    <div className="max-w-7xl mx-auto ">
+    <div className="container mx-auto ">
       <div>
         <h2 className="text-gray-600 text-3xl text-center my-4 italic text-semibold">
           Difference between Node.JS and Javascript

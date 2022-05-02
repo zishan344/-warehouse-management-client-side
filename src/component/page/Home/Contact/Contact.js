@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset();
     toast.success("Successfully send received your info admin panel");
   };
   return (

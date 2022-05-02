@@ -2,7 +2,7 @@ import React from "react";
 
 const Criteria = () => {
   return (
-    <div className="max-w-7xl mx-auto my-20">
+    <div className="container mx-auto my-20">
       <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 justify-center text-center">
         <div>
           <div className="flex justify-center">

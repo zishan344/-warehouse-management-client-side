@@ -38,7 +38,7 @@ const ManageItem = () => {
       });
   };
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="container mx-auto">
       <Table striped bordered hover>
         <thead>
           <tr>
