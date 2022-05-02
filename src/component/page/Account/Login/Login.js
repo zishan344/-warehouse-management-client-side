@@ -93,6 +93,7 @@ const Login = () => {
           <p className="text-danger">
             {error?.message || passworderror?.message}
           </p>
+          {loading && <p>Loading...</p>}
           <div>
             <div className="flex flex-col md:flex-row md:items-center justify-between ">
               <input

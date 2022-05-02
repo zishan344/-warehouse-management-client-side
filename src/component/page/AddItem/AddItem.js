@@ -22,7 +22,6 @@ const AddItem = () => {
       supplyar_name,
       email,
     };
-    console.log(card);
     fetch("https://enigmatic-eyrie-33917.herokuapp.com/product", {
       method: "POST",
       headers: {
