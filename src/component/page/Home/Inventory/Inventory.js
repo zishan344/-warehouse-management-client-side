@@ -34,7 +34,7 @@ const Inventory = () => {
       return;
     }
     if (quantity == -1) {
-      return toast.danger("you have not enough product");
+      return toast.error("please add the product quantity");
     }
 
     const card = {
@@ -67,10 +67,13 @@ const Inventory = () => {
     const image = product.image;
     const description = product.description;
     const price = product.price;
-    const inputValue = e.target.update.value;
-    const quantity = parseInt(inputValue) + parseInt(product.quantity);
+    const inputValue = parseInt(e.target.update.value);
+    const quantity = inputValue + parseInt(product.quantity);
     const email = product.email;
     const supplyar_name = product.supplyar_name;
+    if (!inputValue) {
+      return toast.error("you have not enough product");
+    }
     const card = {
       product_name,
       image,
