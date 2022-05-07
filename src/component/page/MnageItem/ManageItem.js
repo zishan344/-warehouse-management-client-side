@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import Loading from "../../Sheard/Loading/Loading";
 
 const ManageItem = () => {
@@ -23,19 +24,26 @@ const ManageItem = () => {
     );
   }
   const handleDelete = (id) => {
-    const confirm = window.confirm("Are you sure you want to delete");
-    if (!confirm) {
-      return;
-    }
-    const url = `https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`;
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        toast.success("successfully deleted this item");
-        setIsReload(!isReload);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const url = `https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`;
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            toast.success("successfully deleted this item");
+            setIsReload(!isReload);
+          });
+      }
+    });
   };
   return (
     <div className="container mx-auto">

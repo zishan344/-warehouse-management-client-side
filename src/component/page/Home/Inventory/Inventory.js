@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import Loading from "../../../Sheard/Loading/Loading";
-
 const Inventory = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -14,7 +14,7 @@ const Inventory = () => {
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [isReload]);
-  if (product == {}) {
+  if (!product.image) {
     return (
       <div>
         <Loading></Loading>
@@ -29,36 +29,43 @@ const Inventory = () => {
     const quantity = parseInt(product.quantity) - 1;
     const email = product.email;
     const supplyar_name = product.supplyar_name;
-    const confirm = window.confirm("Are you sure you want to delivered");
-    if (!confirm) {
-      return;
-    }
-    if (quantity == -1) {
-      return toast.error("please add the product quantity");
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delivered it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (quantity == -1) {
+          return toast.error("please add the product quantity");
+        }
 
-    const card = {
-      product_name,
-      image,
-      description,
-      price,
-      quantity,
-      supplyar_name,
-      email,
-    };
-    fetch(`https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(card),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success(`${1} product delivered successfully`);
-        setIsReload(!isReload);
-      });
+        const card = {
+          product_name,
+          image,
+          description,
+          price,
+          quantity,
+          supplyar_name,
+          email,
+        };
+        fetch(`https://enigmatic-eyrie-33917.herokuapp.com/product/${id}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(card),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            toast.success(`${1} product delivered successfully`);
+            setIsReload(!isReload);
+          });
+      }
+    });
   };
 
   const handleUpdate = (e) => {
