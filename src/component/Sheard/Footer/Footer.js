@@ -116,7 +116,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="py-6 px-4 bg-gray-100 md:flex md:items-center md:justify-between">
+      <div className="py-6 px-4 bg-gray-100 md:flex md:items-center md:justify-between container">
         <span className="text-sm text-gray-800 sm:text-center">
           © {today.getFullYear()} <Link to="/">Furniture warehouse</Link>. All
           Rights Reserved.

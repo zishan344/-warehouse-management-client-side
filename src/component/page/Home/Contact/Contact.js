@@ -16,7 +16,7 @@ const Contact = () => {
     toast.success("Successfully send received your info admin panel");
   };
   return (
-    <>
+    <div className="container">
       <div className="mt-10 sm:mt-0">
         <h2 className="text-4xl text-center text-gray-600">Get In Touch</h2>
         <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -167,7 +167,7 @@ const Contact = () => {
           <div className="border-t border-gray-200" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
